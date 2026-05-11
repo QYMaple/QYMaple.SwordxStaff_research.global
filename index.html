@@ -59,24 +59,32 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.03);
     }
 
-    @keyframes sweep {
-        0% { clip-path: inset(0 0 98% 0); }
-        25% { clip-path: inset(0 0 0 98%); }
-        50% { clip-path: inset(98% 0 0 0); }
-        75% { clip-path: inset(0 98% 0 0); }
-        100% { clip-path: inset(0 0 98% 0); }
-    }
+    /* 旋转动画：让渐变色沿着边框转圈 */
+@keyframes border-sweep {
+    0% { transform: rotate(0deg); opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: rotate(360deg); opacity: 0; }
+}
 
-    .btn-card.clicked::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border: 3px solid #0071e3;
-        border-radius: 16px;
-        pointer-events: none;
-        z-index: 2;
-        animation: sweep 0.8s linear forwards;
-    }
+    /* 渐变流光边框 */
+.btn-card.clicked::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* 核心：用圆锥渐变做出“彗星”效果，0071e3是主色，透明是尾巴 */
+    background: conic-gradient(from 0deg, #0071e3 0deg, #0071e3 60deg, transparent 120deg);
+    
+    /* 关键：用遮罩只保留边框部分（3px），中间全部掏空 */
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    
+    padding: 3px; /* 这里的数字决定边框的粗细 */
+    border-radius: 16px;
+    pointer-events: none;
+    z-index: 2;
+    animation: border-sweep 0.8s linear forwards;
+}
 
     .btn-img {
         width: 50px;
