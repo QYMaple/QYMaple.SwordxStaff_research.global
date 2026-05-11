@@ -4,74 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>『QY Maple』Sword x Staff "All In One"</title>
-    <link rel="icon" type="https://cdn.discordapp.com/icons/1457142172104261826/6a23e827ada903f225b1877377d4587b.webp?size=160&quality=lossless" href="https://cdn.discordapp.com/icons/1457142172104261826/6a23e827ada903f225b1877377d4587b.webp?size=32">
+    
+    <link rel="icon" type="image/webp" href="https://cdn.discordapp.com/icons/1457142172104261826/6a23e827ada903f225b1877377d4587b.webp?size=32">
     
     <script src="https://cdn.counter.dev/script.js" data-id="ff23c593-ffba-44d1-bef4-f53616e47cf3" data-utcoffset="8"></script>
     
     <style>
-        body {
-            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            background-color: #f5f5f7;
-        }
-        .container {
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            padding: 40px 0;
-        }
-        h1 { font-size: 1.5rem; margin-bottom: 2rem; color: #1d1d1f; font-weight: 700; }
-        
-        /* 卡片基础样式 */
-        .btn-card {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            background-color: white;
-            margin-bottom: 15px;
-            padding: 10px;
-            text-decoration: none;
-            border-radius: 16px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            box-sizing: border-box; /* 确保内边距不撑开宽度 */
-        }
-        .btn-card:active { transform: scale(0.97); }
-        
-        /* 图片图标样式 */
-        .btn-img {
-            width: 50px;
-            height: 50px;
-            border-radius: 10px;
-            object-fit: cover;
-            margin-right: 15px;
-            flex-shrink: 0; /* 防止图片被挤压 */
-            background-color: #f0f0f0; /* 默认底色 */
-        }
+    body {
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        background-color: #f5f5f7;
+        -webkit-tap-highlight-color: transparent;
+    }
 
-        /* 标题文字样式 */
-        .btn-text {
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: #1d1d1f;
-            text-align: left;
-        }
-        
-        .footer {
-            margin-top: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            font-size: 0.85rem;
-            color: #86868b;
-        }
-        .footer a { color: #0071e3; text-decoration: none; font-weight: 600; }
+    .container {
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+        padding: 40px 0;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        color: #1d1d1f;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+    }
+
+    .btn-card {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        background-color: white;
+        margin-bottom: 15px;
+        padding: 10px;
+        text-decoration: none;
+        border-radius: 16px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        box-sizing: border-box;
+        overflow: hidden;
+        z-index: 1;
+        transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+    }
+
+    .btn-card:active {
+        transform: scale(0.96);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    }
+
+    /* 逆时针流光动画 */
+    @keyframes sweep {
+        0% { clip-path: inset(0 0 98% 0); }     /* 上 */
+        25% { clip-path: inset(0 0 0 98%); }    /* 左 */
+        50% { clip-path: inset(98% 0 0 0); }    /* 下 */
+        75% { clip-path: inset(0 98% 0 0); }    /* 右 */
+        100% { clip-path: inset(0 0 98% 0); }   /* 回到顶 */
+    }
+
+    .btn-card.clicked::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 3px solid #0071e3;
+        border-radius: 16px;
+        pointer-events: none;
+        z-index: 2;
+        animation: sweep 0.8s linear forwards;
+    }
+
+    .btn-img {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        object-fit: cover;
+        margin-right: 15px;
+        flex-shrink: 0;
+        background-color: #f0f0f0;
+    }
+
+    .btn-text {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #1d1d1f;
+        text-align: left;
+    }
+
+    .footer {
+        margin-top: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        font-size: 0.85rem;
+        color: #86868b;
+    }
+    .footer a {
+        color: #0071e3;
+        text-decoration: none;
+        font-weight: 600;
+    }
     </style>
 </head>
 <body>
@@ -114,5 +152,18 @@
             <img src="https://cdn.discordapp.com/icons/1457142172104261826/6a23e827ada903f225b1877377d4587b.webp?size=160&quality=lossless" alt="Unique Visitors" style="height: 20px; vertical-align: middle; margin-left: 8px;">
         </div>
     </div>
+
+    <script>
+    document.querySelectorAll('.btn-card').forEach(card => {
+        card.addEventListener('click', function(e) {
+            this.classList.remove('clicked');
+            void this.offsetWidth; 
+            this.classList.add('clicked');
+            setTimeout(() => {
+                this.classList.remove('clicked');
+            }, 800);
+        });
+    });
+    </script>
 </body>
 </html>
