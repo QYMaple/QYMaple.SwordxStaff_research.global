@@ -7,7 +7,8 @@
     
     <link rel="icon" type="image/webp" href="https://cdn.discordapp.com/icons/1457142172104261826/6a23e827ada903f225b1877377d4587b.webp?size=32">
     
-    <script src="https://cdn.counter.dev/script.js" data-id="ff23c593-ffba-44d1-bef4-f53616e47cf3" data-utcoffset="8" data-domain="qymaple.github.io/SwordxStaff_All-In-One"></script>
+    <script data-goatcounter="https://qymaple.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
     
     <style>
     body {
@@ -59,19 +60,15 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.03);
     }
 
-    /* 渐变流光边框：带渐变拖尾的效果 */
+    /* 渐变流光边框动画 */
     .btn-card.clicked::after {
         content: "";
         position: absolute;
         inset: 0;
-        /* 核心：用圆锥渐变做出“彗星”效果，0071e3是主色，透明是尾巴 */
         background: conic-gradient(from 0deg, #0071e3 0deg, #0071e3 60deg, transparent 120deg);
-        
-        /* 镂空中间，只留边框 */
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
-        
         padding: 3px; 
         border-radius: 16px;
         pointer-events: none;
@@ -155,19 +152,16 @@
         <div class="footer">
             <span>Made by</span>
             <a href="https://discord.gg/qyuymQaeak">QY Maple</a>
-            <img src="https://cdn.discordapp.com/icons/1457142172104261826/6a23e827ada903f225b1877377d4587b.webp?size=160&quality=lossless" alt="Unique Visitors" style="height: 20px; vertical-align: middle; margin-left: 8px;">
+            <img src="https://cdn.discordapp.com/icons/1457142172104261826/6a23e827ada903f225b1877377d4587b.webp?size=160&quality=lossless" alt="Logo" style="height: 20px; vertical-align: middle; margin-left: 8px;">
         </div>
     </div>
 
     <script>
         document.querySelectorAll('.btn-card').forEach(card => {
             card.addEventListener('click', function() {
-                // 点击时重置动画
                 this.classList.remove('clicked');
                 void this.offsetWidth; 
                 this.classList.add('clicked');
-
-                // 800ms后移除动画类
                 setTimeout(() => { this.classList.remove('clicked'); }, 800);
             });
         });
