@@ -50,7 +50,7 @@
         border-radius: 16px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         box-sizing: border-box;
-        overflow: hidden;
+        overflow: hidden; /* 必须保留，用于裁切溢出的旋转流光 */
         z-index: 1;
         transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
     }
@@ -60,17 +60,26 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.03);
     }
 
-    /* 渐变流光边框动画 */
+    /* --- 修复后的渐变流光边框动画 --- */
     .btn-card.clicked::after {
         content: "";
         position: absolute;
-        inset: 0;
-        background: conic-gradient(from 0deg, #0071e3 0deg, #0071e3 60deg, transparent 120deg);
+        /* 核心修复：放大尺寸并抵消偏移，确保旋转中心对准卡片中心 */
+        top: -150%; 
+        left: -50%;
+        width: 200%;
+        height: 400%;
+        
+        /* 锥形渐变形成扫射光束 */
+        background: conic-gradient(from 0deg, transparent 65%, #0071e3 90%, transparent 100%);
+        
+        /* 镂空中间，只显示 3px 宽度的边缘线 */
         -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
         padding: 3px; 
         border-radius: 16px;
+        
         pointer-events: none;
         z-index: 2;
         animation: border-sweep 0.8s linear forwards;
@@ -81,6 +90,7 @@
         90% { opacity: 1; }
         100% { transform: rotate(360deg); opacity: 0; }
     }
+    /* ------------------------------ */
 
     .btn-img {
         width: 50px;
@@ -159,10 +169,15 @@
     <script>
         document.querySelectorAll('.btn-card').forEach(card => {
             card.addEventListener('click', function() {
+                // 重置类名以再次触发动画
                 this.classList.remove('clicked');
-                void this.offsetWidth; 
+                void this.offsetWidth; // 触发 reflow
                 this.classList.add('clicked');
-                setTimeout(() => { this.classList.remove('clicked'); }, 800);
+                
+                // 动画播放完(0.8s)后移除类名
+                setTimeout(() => { 
+                    this.classList.remove('clicked'); 
+                }, 800);
             });
         });
     </script>
