@@ -59,13 +59,12 @@
         box-shadow: 0 2px 5px rgba(0,0,0,0.03);
     }
 
-    /* 逆时针流光动画 */
     @keyframes sweep {
-        0% { clip-path: inset(0 0 98% 0); }     /* 上 */
-        25% { clip-path: inset(0 0 0 98%); }    /* 左 */
-        50% { clip-path: inset(98% 0 0 0); }    /* 下 */
-        75% { clip-path: inset(0 98% 0 0); }    /* 右 */
-        100% { clip-path: inset(0 0 98% 0); }   /* 回到顶 */
+        0% { clip-path: inset(0 0 98% 0); }
+        25% { clip-path: inset(0 0 0 98%); }
+        50% { clip-path: inset(98% 0 0 0); }
+        75% { clip-path: inset(0 98% 0 0); }
+        100% { clip-path: inset(0 0 98% 0); }
     }
 
     .btn-card.clicked::after {
@@ -96,6 +95,26 @@
         text-align: left;
     }
 
+    .counter-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin: 10px 0 25px 0;
+    }
+
+    .visitor-stats {
+        background: #1d1d1f;
+        color: #00d4ff; 
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+        font-size: 0.85rem;
+        box-shadow: inset 0 0 8px rgba(0,212,255,0.3), 0 4px 10px rgba(0,0,0,0.1);
+        letter-spacing: 0.5px;
+        border: 1px solid rgba(0,212,255,0.2);
+    }
+        
     .footer {
         margin-top: 2.5rem;
         display: flex;
@@ -138,7 +157,7 @@
 
         <a class="btn-card" href="https://docs.google.com/spreadsheets/d/113BsBNGXrfGkIkYx7cWxPhzxIuQoUzENYiirpsqrp5A/edit?gid=678470076#gid=678470076">
             <img class="btn-img" src="https://media.discordapp.net/attachments/1485015817513992232/1485015817748746250/2026-01-23_1.05.01.png?ex=6a0390c1&is=6a023f41&hm=b6a5e4198032f5cf49799e4f6cdeb65983abd31d914248dbf9593eec2396c08f&=&format=webp&quality=lossless&width=2000&height=1338" alt="icon">
-            <div class="btn-text">Skill Quality Chat</div>
+            <div class="btn-text">Skill Quality Stats</div>
         </a>
 
         <a class="btn-card" href="https://discord.gg/qyuymQaeak">
@@ -146,6 +165,12 @@
             <div class="btn-text" style="color: #5865F2;">Join Discord Community</div>
         </a>
 
+        <div class="counter-wrapper">
+            <div class="visitor-stats">
+                Global Guide Clicks: <span id="click-count">Loading...</span>
+            </div>
+        </div>
+        
         <div class="footer">
             <span>Made by</span>
             <a href="https://discord.gg/qyuymQaeak">QY Maple</a>
@@ -154,16 +179,38 @@
     </div>
 
     <script>
-    document.querySelectorAll('.btn-card').forEach(card => {
-        card.addEventListener('click', function(e) {
-            this.classList.remove('clicked');
-            void this.offsetWidth; 
-            this.classList.add('clicked');
-            setTimeout(() => {
+        const countElement = document.getElementById('click-count');
+        const namespace = "qy_maple_sword_staff";
+        const key = "clicks";
+
+        // 获取并格式化数字的函数
+        function updateDisplay(val) {
+            countElement.innerText = Number(val).toLocaleString();
+        }
+
+        // 1. 初始化获取
+        fetch(`https://api.countapi.xyz/get/${namespace}/${key}`)
+            .then(res => res.json())
+            .then(data => updateDisplay(data.value || 0))
+            .catch(() => { countElement.innerText = "Online"; });
+
+        // 2. 点击逻辑
+        document.querySelectorAll('.btn-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // 特效触发
                 this.classList.remove('clicked');
-            }, 800);
+                void this.offsetWidth; 
+                this.classList.add('clicked');
+
+                // 计数加一并更新
+                fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+                    .then(res => res.json())
+                    .then(data => updateDisplay(data.value))
+                    .catch(err => console.log('Counter update failed'));
+
+                setTimeout(() => { this.classList.remove('clicked'); }, 800);
+            });
         });
-    });
     </script>
 </body>
 </html>
