@@ -20,6 +20,7 @@
         min-height: 100vh;
         margin: 0;
         background-color: #f5f5f7;
+        /* 移除点击时的蓝色高亮（移动端优化） */
         -webkit-tap-highlight-color: transparent;
     }
 
@@ -50,47 +51,15 @@
         border-radius: 16px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         box-sizing: border-box;
-        overflow: hidden; /* 必须保留，用于裁切溢出的旋转流光 */
-        z-index: 1;
+        overflow: hidden;
         transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
     }
 
+    /* 仅保留基础的点击缩放反馈，让用户知道点中了 */
     .btn-card:active {
-        transform: scale(0.96);
+        transform: scale(0.98);
         box-shadow: 0 2px 5px rgba(0,0,0,0.03);
     }
-
-    /* --- 修复后的渐变流光边框动画 --- */
-    .btn-card.clicked::after {
-        content: "";
-        position: absolute;
-        /* 核心修复：放大尺寸并抵消偏移，确保旋转中心对准卡片中心 */
-        top: -150%; 
-        left: -50%;
-        width: 200%;
-        height: 400%;
-        
-        /* 锥形渐变形成扫射光束 */
-        background: conic-gradient(from 0deg, transparent 65%, #0071e3 90%, transparent 100%);
-        
-        /* 镂空中间，只显示 3px 宽度的边缘线 */
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        padding: 3px; 
-        border-radius: 16px;
-        
-        pointer-events: none;
-        z-index: 2;
-        animation: border-sweep 0.8s linear forwards;
-    }
-
-    @keyframes border-sweep {
-        0% { transform: rotate(0deg); opacity: 1; }
-        90% { opacity: 1; }
-        100% { transform: rotate(360deg); opacity: 0; }
-    }
-    /* ------------------------------ */
 
     .btn-img {
         width: 50px;
@@ -161,25 +130,8 @@
         
         <div class="footer">
             <span>Made by</span>
-            <a href="https://discord.gg/qyuymQaeak">QY Maple</a>
-            <img src="https://cdn.discordapp.com/icons/1457142172104261826/6a23e827ada903f225b1877377d4587b.webp?size=160&quality=lossless" alt="Logo" style="height: 20px; vertical-align: middle; margin-left: 8px;">
+            <a href="https://swordxstaff.fandom.com/wiki/QY_Maple">QY Maple</a>
         </div>
     </div>
-
-    <script>
-        document.querySelectorAll('.btn-card').forEach(card => {
-            card.addEventListener('click', function() {
-                // 重置类名以再次触发动画
-                this.classList.remove('clicked');
-                void this.offsetWidth; // 触发 reflow
-                this.classList.add('clicked');
-                
-                // 动画播放完(0.8s)后移除类名
-                setTimeout(() => { 
-                    this.classList.remove('clicked'); 
-                }, 800);
-            });
-        });
-    </script>
 </body>
 </html>
