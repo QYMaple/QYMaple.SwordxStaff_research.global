@@ -21,22 +21,43 @@
             text-align: center;
             padding: 40px 0;
         }
-        h1 { font-size: 1.5rem; margin-bottom: 2rem; color: #1d1d1f; }
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 15px 0;
-            margin-bottom: 15px;
-            background-color: #0071e3;
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: transform 0.2s, background-color 0.2s;
-        }
-        .btn:active { transform: scale(0.98); background-color: #005bbd; }
+        h1 { font-size: 1.5rem; margin-bottom: 2rem; color: #1d1d1f; font-weight: 700; }
         
-        /* 底部名字和链接并排样式 */
+        /* 卡片基础样式 */
+        .btn-card {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            background-color: white;
+            margin-bottom: 15px;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-sizing: border-box; /* 确保内边距不撑开宽度 */
+        }
+        .btn-card:active { transform: scale(0.97); }
+        
+        /* 图片图标样式 */
+        .btn-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-right: 15px;
+            flex-shrink: 0; /* 防止图片被挤压 */
+            background-color: #f0f0f0; /* 默认底色 */
+        }
+
+        /* 标题文字样式 */
+        .btn-text {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #1d1d1f;
+            text-align: left;
+        }
+        
         .footer {
             margin-top: 2.5rem;
             display: flex;
@@ -46,28 +67,47 @@
             font-size: 0.85rem;
             color: #86868b;
         }
-        .footer a {
-            color: #0071e3;
-            text-decoration: none;
-            font-weight: 600;
-        }
+        .footer a { color: #0071e3; text-decoration: none; font-weight: 600; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Choose Your Destination</h1>
+        <h1>Sword x Staff Guide</h1>
         
-        <a class="btn" href="https://docs.google.com/spreadsheets/d/113BsBNGXrfGkIkYx7cWxPhzxIuQoUzENYiirpsqrp5A/edit?gid=0#gid=0">Main Timeline</a>
-        <a class="btn" href="https://docs.google.com/spreadsheets/d/113BsBNGXrfGkIkYx7cWxPhzxIuQoUzENYiirpsqrp5A/edit?gid=902904783#gid=902904783">Grand Treasure Hunt Timeline</a>
-        <a class="btn" href="https://docs.google.com/spreadsheets/d/113BsBNGXrfGkIkYx7cWxPhzxIuQoUzENYiirpsqrp5A/edit?gid=1227676989#gid=1227676989">Relic Special Stats</a>
-        <a class="btn" href="https://docs.google.com/spreadsheets/d/113BsBNGXrfGkIkYx7cWxPhzxIuQoUzENYiirpsqrp5A/edit?gid=1525661889#gid=1525661889">Companions Special Stats</a>
-        <a class="btn" href="https://docs.google.com/spreadsheets/d/113BsBNGXrfGkIkYx7cWxPhzxIuQoUzENYiirpsqrp5A/edit?gid=678470076#gid=678470076">Skill Quality Stats</a>
-        <a class="btn" href="https://docs.google.com/spreadsheets/d/113BsBNGXrfGkIkYx7cWxPhzxIuQoUzENYiirpsqrp5A/edit?gid=1938942860#gid=1938942860">Class Change Skill Chat</a>
-        <a class="btn" href="https://discord.gg/qyuymQaeak" style="background-color: #5865F2;">Join Discord Community</a>
+        <a class="btn-card" href="https://docs.google.com/spreadsheets/d/113BsBNGXrfGkIkYx7cWxPhzxIuQoUzENYiirpsqrp5A/edit?gid=0#gid=0">
+            <img class="btn-img" src="https://media.discordapp.net/attachments/1468015552772706420/1468015553779204136/2026-02-02_4.49.09.png?ex=6a0305c6&is=6a01b446&hm=f660d38b94402cf15d5c90f7750a247f3a94db7769ff90af9342444323c375eb&=&format=webp&quality=lossless&width=1076&height=768" alt="icon">
+            <div class="btn-text">Main Timeline</div>
+        </a>
+
+        <a class="btn-card" href="https://docs.google.com/spreadsheets/d/113BsBNGXrfGkIkYx7cWxPhzxIuQoUzENYiirpsqrp5A/edit?gid=902904783#gid=902904783">
+            <img class="btn-img" src="https://media.discordapp.net/attachments/1487207422815637715/1487207423075815434/2026-01-27_10.16.24.png?ex=6a02f818&is=6a01a698&hm=f1eae1388f818ea8c2c2f8405ae0cde0778de7d0fcd13a23d99c08db65d696f1&=&format=webp&quality=lossless&width=1468&height=984" alt="icon">
+            <div class="btn-text">Grand Treasure Hunt Timeline</div>
+        </a>
+
+        <a class="btn-card" href="https://docs.google.com/spreadsheets/d/113BsBNGXrfGkIkYx7cWxPhzxIuQoUzENYiirpsqrp5A/edit?gid=1227676989#gid=1227676989">
+            <img class="btn-img" src="https://media.discordapp.net/attachments/1495887209541402634/1495887209792929882/2026-04-20_3.41.29.png?ex=6a039087&is=6a023f07&hm=1cf2d568da8971cd3375fdfab23832eef72f46b12ae5c34714abab3272cefd43&=&format=webp&quality=lossless&width=196&height=200" alt="icon">
+            <div class="btn-text">Relic Special Stats</div>
+        </a>
+
+        <a class="btn-card" href="https://docs.google.com/spreadsheets/d/113BsBNGXrfGkIkYx7cWxPhzxIuQoUzENYiirpsqrp5A/edit?gid=1525661889#gid=1525661889">
+            <img class="btn-img" src="https://media.discordapp.net/attachments/1495901771577688154/1495901772839911466/-.png?ex=6a02f557&is=6a01a3d7&hm=fbe938e78fd8817fc31cd7aa29b24f3d82dba00b4745924e9b52f01a5556d208&=&format=webp&quality=lossless&width=1600&height=1546" alt="icon">
+            <div class="btn-text">Companions Special Stats</div>
+        </a>
+
+        <a class="btn-card" href="https://docs.google.com/spreadsheets/d/113BsBNGXrfGkIkYx7cWxPhzxIuQoUzENYiirpsqrp5A/edit?gid=678470076#gid=678470076">
+            <img class="btn-img" src="https://media.discordapp.net/attachments/1485015817513992232/1485015817748746250/2026-01-23_1.05.01.png?ex=6a0390c1&is=6a023f41&hm=b6a5e4198032f5cf49799e4f6cdeb65983abd31d914248dbf9593eec2396c08f&=&format=webp&quality=lossless&width=2000&height=1338" alt="icon">
+            <div class="btn-text">Skill Quality Stats</div>
+        </a>
+
+        <a class="btn-card" href="https://discord.gg/qyuymQaeak">
+            <img class="btn-img" src="https://cdn.discordapp.com/icons/1457142172104261826/6a23e827ada903f225b1877377d4587b.webp?size=160&quality=lossless" alt="icon">
+            <div class="btn-text" style="color: #5865F2;">Join Discord Community</div>
+        </a>
 
         <div class="footer">
             <span>Made by</span>
             <a href="https://discord.gg/qyuymQaeak">QY Maple</a>
+            <img src="https://cdn.discordapp.com/icons/1457142172104261826/6a23e827ada903f225b1877377d4587b.webp?size=160&quality=lossless" alt="Unique Visitors" style="height: 20px; vertical-align: middle; margin-left: 8px;">
         </div>
     </div>
 </body>
