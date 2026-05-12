@@ -78,6 +78,48 @@
         text-align: left;
     }
 
+    /* --- 多链接卡片专属样式 --- */
+    .btn-card-multiple {
+        flex-direction: column !important; /* 强制标题和按钮组上下分层 */
+        align-items: flex-start !important;
+        cursor: default !important;
+        padding: 15px !important;
+    }
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 12px; /* 给下方的按钮留出空间 */
+    }
+
+    .btn-links-group {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 8px;
+        width: 100%;
+    }
+
+    .sub-link {
+        padding: 8px 5px;
+        background: #f5f5f7;
+        color: #0071e3;
+        text-decoration: none;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-align: center;
+        transition: all 0.2s;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; 
+    }
+
+    .sub-link:active {
+        transform: scale(0.95);
+        background: #e8e8ed;
+    }
+    
     .footer {
         margin-top: 2.5rem;
         display: flex;
@@ -92,36 +134,6 @@
         text-decoration: none;
         font-weight: 600;
     }
-
-    /* 仅针对多链接卡片的微调 */
-    .btn-card-multiple {
-        cursor: default !important; /* 鼠标移上去不再显示小手指针，因为背景不能点 */
-    }
-    
-    .btn-links-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        margin-left: auto; /* 核心：将按钮组推向卡片最右侧 */
-    }
-
-    .sub-link {
-        padding: 6px 14px;
-        background: #f5f5f7; /* Apple 灰色按钮背景 */
-        color: #0071e3;
-        text-decoration: none;
-        border-radius: 10px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        white-space: nowrap;
-        transition: all 0.2s ease;
-        border: 1px solid transparent;
-    }
-    
-    .sub-link:active {
-        transform: scale(0.95);
-        background: #e8e8ed;
-    }
     </style>
 </head>
 <body>
@@ -134,13 +146,22 @@
         </a>
 
         <div class="btn-card btn-card-multiple">
-            <img class="btn-img" src="https://media.discordapp.net/attachments/1485032365024870661/1485032365612077248/2026-01-29_3.46.02.png?ex=6a03a02a&is=6a024eaa&hm=a2408e1b82e9f47c168c41357ff33b0253deb09524b6ab743e61431a7544f44a&=&format=webp&quality=lossless&width=1448&height=1108" alt="icon">
-            
-            <div class="btn-text" style="flex-grow: 1;">Astral Destiny</div>
+        <div class="card-header">
+            <img class="btn-img" src="https://media.discordapp.net/attachments/1485032365024870661/1485032365612077248/2026-01-29_3.46.02.png?..." alt="icon">
+            <div class="btn-text">Astral Destiny</div>
+        </div>
+        
+        <div class="btn-card btn-card-multiple">
+            <div class="card-header">
+                <img class="btn-img" src="https://media.discordapp.net/attachments/1485032365024870661/1485032365612077248/2026-01-29_3.46.02.png?..." alt="icon">
+                <div class="btn-text">Astral Destiny</div>
+            </div>
             
             <div class="btn-links-group">
                 <a class="sub-link" href="https://ggl.link/qy-astral-s1-s3">S1~S3</a>
-                <a class="sub-link" href="https://ggl.link/qy-astral-s1-s3">S1~S3</a>
+                <a class="sub-link" href="https://ggl.link/qy-astral-s1-s3">S4~S6</a>
+                <a class="sub-link" href="#">S7~S9</a>
+                <a class="sub-link" href="#">S10+</a>
             </div>
         </div>
 
