@@ -82,16 +82,19 @@
     }
     .btn-links-group {
         display: flex;
-        flex-direction: row-reverse; 
-        flex-wrap: wrap;             
-        justify-content: flex-start; 
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: flex-start; 
+        flex-direction: column-reverse;
+        direction: rtl;
         gap: 8px;
         margin-left: auto;
-        max-width: 180px; 
+        height: 105px;
     }
 
     .sub-link {
-        width: 80px; 
+        direction: ltr;
+        width: 80px;
         padding: 8px 0;
         background: #f5f5f7;
         color: #0071e3;
@@ -105,6 +108,7 @@
     .sub-link:active {
         transform: scale(0.95);
         background: #e8e8ed;
+    }
     
     .footer {
         margin-top: 2.5rem;
