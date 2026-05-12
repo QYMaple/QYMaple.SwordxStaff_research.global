@@ -92,6 +92,36 @@
         text-decoration: none;
         font-weight: 600;
     }
+
+    /* 仅针对多链接卡片的微调 */
+    .btn-card-multiple {
+        cursor: default !important; /* 鼠标移上去不再显示小手指针，因为背景不能点 */
+    }
+    
+    .btn-links-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-left: auto; /* 核心：将按钮组推向卡片最右侧 */
+    }
+
+    .sub-link {
+        padding: 6px 14px;
+        background: #f5f5f7; /* Apple 灰色按钮背景 */
+        color: #0071e3;
+        text-decoration: none;
+        border-radius: 10px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        white-space: nowrap;
+        transition: all 0.2s ease;
+        border: 1px solid transparent;
+    }
+    
+    .sub-link:active {
+        transform: scale(0.95);
+        background: #e8e8ed;
+    }
     </style>
 </head>
 <body>
@@ -102,6 +132,17 @@
             <img class="btn-img" src="https://media.discordapp.net/attachments/1468015552772706420/1468015553779204136/2026-02-02_4.49.09.png?ex=6a0305c6&is=6a01b446&hm=f660d38b94402cf15d5c90f7750a247f3a94db7769ff90af9342444323c375eb&=&format=webp&quality=lossless&width=1076&height=768" alt="icon">
             <div class="btn-text">Game Timeline</div>
         </a>
+
+        <div class="btn-card btn-card-multiple">
+            <img class="btn-img" src="https://media.discordapp.net/attachments/1485015817513992232/1485015817748746250/2026-01-23_1.05.01.png?ex=6a0390c1&is=6a023f41&hm=b6a5e4198032f5cf49799e4f6cdeb65983abd31d914248dbf9593eec2396c08f&=&format=webp&quality=lossless&width=2000&height=1338" alt="icon">
+            
+            <div class="btn-text" style="flex-grow: 1;">Class Change Skill</div>
+            
+            <div class="btn-links-group">
+                <a class="sub-link" href="https://ggl.link/qy-skill-chat">Skill Chat</a>
+                <a class="sub-link" href="https://ggl.link/qy-stats-convert">Stats Convert</a>
+            </div>
+        </div>
 
         <a class="btn-card" href="https://ggl.link/qy-treasure-hunt">
             <img class="btn-img" src="https://media.discordapp.net/attachments/1495901437056651274/1503544067890614302/2026-205-11_6.31.20.png?ex=6a03bc08&is=6a026a88&hm=cb206cba923a739b0409e0e698ff46f885a008b1976df40f01a69586aec4f740&=&format=webp&quality=lossless&width=400&height=400" alt="icon">
