@@ -45,12 +45,34 @@
         padding: 40px 0;
     }
 
+    .header-container {
+        display: flex;
+        flex-direction: row; 
+        align-items: baseline; /* 讓標題和 EN 的文字底部對齊 */
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 2rem;
+        gap: 16px; /* 這裡控制「標題」和「EN」之間的距離，數字越大隔越開 */
+    }
+
     h1 {
         font-size: 1.5rem;
-        margin-bottom: 2rem;
+        margin: 0;
         color: #1d1d1f;
         font-weight: 700;
         letter-spacing: -0.5px;
+    }
+
+    .lang-switch {
+        font-size: 0.85rem; /* 讓 EN 字體明顯更小 */
+        color: #86868b; /* 灰色純文字質感 */
+        font-weight: 600;
+        text-decoration: none; /* 移除底線 */
+        transition: opacity 0.2s ease;
+    }
+
+    .lang-switch:active {
+        opacity: 0.5; /* 點擊時的微透明回饋感 */
     }
 
     .btn-card {
@@ -141,7 +163,10 @@
 </head>
 <body>
     <div class="container">
-        <h1>Sword x Staff Research Tab</h1>
+        <div class="header-container">
+            <h1>Sword x Staff Research Tab</h1>
+            <a href="https://qymaple.github.io/sxs-research-tw" class="lang-switch">EN</a>
+        </div>
         
         <a class="btn-card" href="maple-sxs-timeline.html">
             <img class="btn-img" src="https://github.com/QYMaple/sxs-research-global/blob/main/img/%E5%89%AF%E6%9C%AC.png?raw=true" alt="icon">
