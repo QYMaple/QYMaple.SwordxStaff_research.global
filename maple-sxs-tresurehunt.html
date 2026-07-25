@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- 網站標題 -->
+  <title>杖劍傳說秘寶大作戰時間線 - 楓琴柚</title>
+  <meta property="og:site_name" content="杖劍傳說資訊查詢表 - 楓琴柚">
+  <meta name="description" content="杖劍傳說完整的秘寶大作戰時間線，從開服到最新階段">
+  <meta name="keywords" content="杖劍傳說, 杖劍傳說秘寶, 杖劍傳說時間線，杖劍傳說秘寶大作戰, 楓琴柚, 仗劍傳說, 仗劍傳說攻略, Sword x Staff, SxS guide, SxS timeline, QY Maple">
+    
+  <!-- 圖標設定 -->
+  <link rel="icon" type="image/png" href="./img/icon.png">
+  <link rel="apple-touch-icon" href="./img/icon.png">
+    
+  <!-- Google Analytics 4 (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3DGTBXEWK3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-3DGTBXEWK3');
+  </script>
+
+  <style>
+    /* 全域基礎設定 */
+    * {
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #f5f5f7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    /* 頂部導覽列：預設電腦端 */
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      height: 50px;
+      padding: 0 16px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #e5e5e5;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+      z-index: 100;
+      position: relative;
+    }
+    
+    /* 新增：Logo 尺寸鎖定，防止撐爆版面 */
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      margin-right: 8px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .nav-logo img {
+      height: 32px !important;
+      width: auto !important;
+      display: block !important;
+    }
+
+    /* 按鈕基礎樣式 */
+    .nav-btn {
+      padding: 8px 16px;
+      border: none;
+      background-color: #f2f2f7;
+      color: #1c1c1e;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-btn:hover {
+      background-color: #e5e5ea;
+    }
+
+    .nav-btn.active {
+      background-color: #007aff;
+      color: #ffffff;
+    }
+
+    /* 表格容器與 iframe */
+    .iframe-container {
+      width: 100%;
+      height: calc(100% - 50px);
+      position: relative;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* 📱 手機端 RWD 適配 (螢幕寬度 < 600px) */
+    @media (max-width: 600px) {
+      .nav-bar {
+        height: 44px;
+        padding: 0 12px;
+        gap: 8px;
+        overflow-x: auto; /* 超出時支援滑動 */
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch; /* iOS 滑動順暢 */
+      }
+
+      /* 隱藏滾動條 */
+      .nav-bar::-webkit-scrollbar {
+        display: none;
+      }
+      .nav-bar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .nav-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+        flex-shrink: 0; /* 禁止按鈕在手機上被擠壓 */
+      }
+
+      .iframe-container {
+        height: calc(100% - 44px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 頂部切換按鈕區 -->
+  <div class="nav-bar">
+    <!-- 新增的 Logo 區塊，點擊會回到首頁 -->
+    <a href="index.html" class="nav-logo">
+      <img src="./img/LogoBlack.png" alt="楓琴柚">
+    </a>
+    
+  <!-- 頂部切換按鈕區 -->
+    <button class="nav-btn" onclick="window.location.href='index.html'">
+      首頁
+    </button>
+    <button class="nav-btn" onclick="window.location.href='fqy-sxs-timeline.html'">
+      賽季時間線
+    </button>
+    <button class="nav-btn" onclick="window.location.href='fqy-sxs-astral-s1-s3.html'">
+      原初之星 S1~S3
+    </button>
+    <button class="nav-btn" onclick="window.location.href='fqy-sxs-astral-s4-s6.html'">
+      原初之星 S4~S6
+    </button>
+    <!-- 假設你現在正在編輯 S4~S6 這一頁，就把 active 加在它身上 -->
+    <button class="nav-btn active" onclick="window.location.href='fqy-sxs-tresurehunt.html'">
+      秘寶大作戰時間線
+    </button>
+    <button class="nav-btn" onclick="window.location.href='fqy-sxs-companions.html'">
+      夥伴圖鑑
+    </button>
+    <button class="nav-btn" onclick="window.location.href='fqy-sxs-specialrelic.html'">
+      特殊遺物
+    </button>
+    <button class="nav-btn" onclick="window.location.href='fqy-sxs-classchange.html'">
+      技能轉換表
+    </button>
+  </div>
+
+  <!-- 嵌入試算表 -->
+  <div class="iframe-container">
+    <iframe id="sheet-iframe" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR5j5ixmZvvwt6xyHTG9WmKMYaobu_8nC2fbACE5X4yetxBp_a09Mfdr7ycixR9AOONPc9wb4D7ZlCz/pubhtml?gid=1916723692&single=true&widget=false&chrome=false"></iframe>
+  </div>
+
+  <!-- JS 邏輯控制與 GA4 數據事件發送 -->
+  <script>
+    function switchSheet(url, tabName, btnElement) {
+      var iframe = document.getElementById('sheet-iframe');
+      
+      // 防止重複點擊當前頁面
+      if (iframe.src === url) return;
+
+      // 1. 切換表格 URL
+      iframe.src = url;
+
+      // 2. 切換按鈕高亮狀態
+      var buttons = document.querySelectorAll('.nav-btn');
+      buttons.forEach(function(btn) {
+        btn.classList.remove('active');
+      });
+      btnElement.classList.add('active');
+
+      // 3. 發送 GA4 自訂事件
+      if (typeof gtag === 'function') {
+        gtag('event', 'select_content', {
+          'content_type': 'sheet_tab',
+          'item_id': tabName
+        });
+      }
+    }
+  </script>
+
+</body>
+</html>
