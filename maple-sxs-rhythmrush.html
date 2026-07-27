@@ -639,13 +639,88 @@
       cache: new Map()
     };
 
-    const BUILT_IN_SONGS = [
+    const GITHUB_SONGS_API = 'https://api.github.com/repos/QYMaple/sxs-research-global/contents/songs?ref=main';
+    const AUDIO_FILE_PATTERN = /\.(mp3|wav|m4a|aac|ogg|flac)$/i;
+
+    let BUILT_IN_SONGS = [
       {
         id: 'huanyu-unravel-in-the-end',
         title: 'Huanyu Benglie × Unravel × In The End',
         src: './songs/huanyu-unravel-in-the-end.mp3'
       }
     ];
+
+    function formatSongTitle(fileName) {
+      return fileName
+        .replace(AUDIO_FILE_PATTERN, '')
+        .replace(/[_-]+/g, ' ')
+        .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function renderSongLibrary(songList) {
+      builtInSongSelect.replaceChildren();
+
+      const placeholder = document.createElement('option');
+      placeholder.value = '';
+      placeholder.textContent = songList.length
+        ? `Choose from ${songList.length} songs`
+        : 'No songs found';
+      builtInSongSelect.appendChild(placeholder);
+
+      for (const song of songList) {
+        const option = document.createElement('option');
+        option.value = song.id;
+        option.textContent = song.title;
+        builtInSongSelect.appendChild(option);
+      }
+    }
+
+    async function loadGitHubSongLibrary() {
+      builtInSongSelect.disabled = true;
+      setStatus('Loading song library');
+
+      try {
+        const response = await fetch(GITHUB_SONGS_API, {
+          headers: {
+            Accept: 'application/vnd.github+json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`GitHub song request failed with status ${response.status}`);
+        }
+
+        const files = await response.json();
+        if (!Array.isArray(files)) {
+          throw new Error('GitHub did not return a song list.');
+        }
+
+        BUILT_IN_SONGS = files
+          .filter((file) => file.type === 'file' && AUDIO_FILE_PATTERN.test(file.name))
+          .map((file) => ({
+            id: file.name,
+            title: formatSongTitle(file.name),
+            src: file.download_url
+          }))
+          .sort((a, b) => a.title.localeCompare(b.title, undefined, { sensitivity: 'base' }));
+
+        renderSongLibrary(BUILT_IN_SONGS);
+        setStatus(BUILT_IN_SONGS.length ? 'Song library ready' : 'No songs found');
+        stateText.textContent = BUILT_IN_SONGS.length
+          ? `${BUILT_IN_SONGS.length} GitHub songs are ready. Choose one to load it.`
+          : 'Upload audio files to the GitHub songs folder, then refresh this page.';
+      } catch (error) {
+        console.error(error);
+        BUILT_IN_SONGS = [];
+        renderSongLibrary(BUILT_IN_SONGS);
+        setStatus('Song library unavailable');
+        stateText.textContent = 'The GitHub song list could not be loaded. Refresh the page or upload a local song.';
+      } finally {
+        builtInSongSelect.disabled = false;
+      }
+    }
 
     const laneCount = 4;
     const laneNames = ['Lane 1', 'Lane 2', 'Lane 3', 'Lane 4'];
@@ -1841,6 +1916,7 @@
       window.addEventListener('resize', resizeCanvas);
       resetUI();
       stateText.textContent = 'Choose a library song or upload local audio to begin.';
+      loadGitHubSongLibrary();
       requestAnimationFrame(() => {
         draw(0);
       });
